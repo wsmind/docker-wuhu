@@ -32,7 +32,7 @@ Vagrant.configure("2") do |config|
   # Create a forwarded port mapping which allows access to a specific port
   # within the machine from a port on the host machine and only allow access
   # via 127.0.0.1 to disable public access
-  config.vm.network "forwarded_port", guest: 80, host: 80, host_ip: "127.0.0.1"
+  config.vm.network "forwarded_port", guest: 80, host: 80, host_ip: "0.0.0.0"
 
   # Create a private network, which allows host-only access to the machine
   # using a specific IP.
@@ -68,8 +68,8 @@ Vagrant.configure("2") do |config|
   # Puppet, Chef, Ansible, Salt, and Docker are also available. Please see the
   # documentation for more information about their specific syntax and use.
   config.vm.provision "shell", inline: <<-SHELL
-	apt-get -y update && apt-get -y upgrade
-	apt-get -y install apache2 php5 php5-gd php5-mysqlnd php5-curl mysql-server-5.5 libapache2-mod-php5 mc git ssh sudo
+	apt-get -y update
+	apt-get -y install apache2 php5 php5-gd php5-mysqlnd php5-curl libapache2-mod-php5 mc git ssh sudo
 
 	cd /home/vagrant/app && ./wuhu-install.sh
   SHELL
